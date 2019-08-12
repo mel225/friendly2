@@ -3,8 +3,6 @@ addEventListener("DOMContentLoaded", exec);
 function exec(){
   var fr_from = document.getElementById("fr_from");
   var fr_to = document.getElementById("fr_to");
- 
-  console.log(document.getElementById("fr_from"));
   
   for(var i=0; i<=800; i++){
     var from = fr_from.appendChild(document.createElement("option"));
@@ -56,7 +54,6 @@ function setTableData(from, to){
   var to100 = parseInt(to / 100);
   var to10 = parseInt(to / 10  - parseInt(to / 100) * 10);
   var to1 = parseInt(to - parseInt(to / 10) * 10);
-  console.log("from,to: ", from100, from10, from1, to100, to10, to1);
   
   var counter = [];
   for(i=0; i<6; i++){
