@@ -60,10 +60,10 @@ function setTableData(from, to){
   
   var counter = [];
   for(i=0; i<6; i++){
-    counter[i] = 6 + 1.2 * i;
+    counter[i] = 60 + 12 * i;
   }
-  counter[6] = 22.8;
-  counter[7] = 31.2;
+  counter[6] = 228;
+  counter[7] = 312;
   counter[8] = 0;
   var reviver = [];
   reviver[10] = 0;
@@ -72,14 +72,14 @@ function setTableData(from, to){
   }
   
   // 必要親密度値
-  var fr_want = -(counter[from100] * (from10 + 1) * from1 - counter[to100] * (to10 + 1) * to1);
+  var fr_want = -(counter[from100] * (from10 + 1) * from1 - counter[to100] * (to10 + 1) * to1) / 10;
   console.log("  1: ", fr_want);
-  fr_want += counter[from100] * reviver[from10] * 10 - counter[to100] * reviver[to10] * 10;
+  fr_want += counter[from100] * reviver[from10] - counter[to100] * reviver[to10];
   console.log(" 10: ", fr_want);
   for(i = from100 + 1; i < 8; i++)
-    fr_want += counter[i] * 550;
+    fr_want += counter[i] * 55;
   for(i = to100 + 1; i < 8; i++)
-    fr_want -= counter[i] * 550;
+    fr_want -= counter[i] * 55;
   console.log("100: ", fr_want);
   document.getElementById("fr_want").innerText = fr_want;
   
