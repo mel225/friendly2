@@ -42,7 +42,7 @@ function setTableData(from, to){
     alert("値が逆転しています！");
     var fr_table = document.getElementById("fr_table");
     for(var i=0; i<fr_table.rows.length; i++){
-      table.rows[i].cells[1].innerText = "0";
+      fr_table.rows[i].cells[1].innerText = "0";
     }
     return;
   }
