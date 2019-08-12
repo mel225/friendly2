@@ -72,15 +72,13 @@ function setTableData(from, to){
   }
   
   // 必要親密度値
-  var fr_want = -(counter[from100] * (from10 + 1) * from1 - counter[to100] * (to10 + 1) * to1) / 10;
-  console.log("  1: ", fr_want);
-  fr_want += counter[from100] * reviver[from10] - counter[to100] * reviver[to10];
-  console.log(" 10: ", fr_want);
+  var fr_want = 0;
   for(i = from100 + 1; i < 8; i++)
     fr_want += counter[i] * 55;
   for(i = to100 + 1; i < 8; i++)
     fr_want -= counter[i] * 55;
-  console.log("100: ", fr_want);
+  fr_want += counter[from100] * reviver[from10] - counter[to100] * reviver[to10];
+  fr_want -= (counter[from100] * (from10 + 1) * from1 - counter[to100] * (to10 + 1) * to1) / 10;
   document.getElementById("fr_want").innerText = fr_want;
   
   // プレゼント(大, 中, 小)
