@@ -29,7 +29,7 @@ javascript:
     counter[7] = 312;
     
     /* character name table */
-    var name = ["¯ç ‚ ‚©‚è", "“¡‘ò —Mq", "OŠp ˆ¨", "‚£ —œ", "Œ‹é ä»‹è", "—•Œ´ ’Ö", "÷ˆä tØ", "‘‰³— Ê‰Ø", "ˆä”VŒ´ ¬¯", "”–Ø ç•P", "‹ãŠ •–", "ˆ§â ˆ©", "ìF“‡ —L²"];
+    var name = ["æ˜Ÿå’² ã‚ã‹ã‚Š", "è—¤æ²¢ æŸšå­", "ä¸‰è§’ è‘µ", "é«˜ç€¬ æ¢¨ç·’", "çµåŸ è‰ç–", "è—åŸ æ¤¿", "æ¡œäº• æ˜¥èœ", "æ—©ä¹™å¥³ å½©è¯", "äº•ä¹‹åŸ å°æ˜Ÿ", "æŸæœ¨ å’²å§«", "ä¹æ¢ æ¥“", "é€¢å‚ èŒœ", "ç æ´²å³¶ æœ‰æ –", "æ—¥å‘ åƒå¤", "æŸæœ¨ ç¾äºœ", "æ±é›² ã¤ã‚€ã"];
     var containers = d.getElementsByClassName("character_friendly_conainer");
     var friendlies = [].map.call(containers, function(item){
       return item.firstElementChild;
@@ -48,9 +48,9 @@ javascript:
     var s = "";
     for(i=0; i<name.length; i++){
       f = friendlyCount[i];
-      c = counter[parseInt(f/100)] * parseInt((f % 100)/10 + 1);
+      c = counter[parseInt(f/100)] * parseInt((f - parseInt(f / 100))/10 + 1);
       t = parseInt(parcentages[i] * c / 6 + 0.5) / 10;
-      s += "[" + name[i] + "] " + f + " + " + (c-t) + "/" + c + " (‚ ‚Æ " + t + " Track)\n";
+      s += "[" + name[i] + "] " + f + " + " + (c-t) + "/" + c + " (ã‚ã¨ " + t + " Track)\n";
     }
     window.open().document.body.innerText = s;
   };
