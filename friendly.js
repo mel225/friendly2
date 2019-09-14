@@ -48,7 +48,7 @@ javascript:
     var s = "";
     for(i=0; i<name.length; i++){
       f = friendlyCount[i];
-      c = counter[parseInt(f/100)] * parseInt((f - parseInt(f / 100))/10 + 1);
+      c = counter[parseInt(f/100)] * parseInt((f - parseInt(f / 100))/10 + 1) / 10;
       t = parseInt(parcentages[i] * c / 6 + 0.5) / 10;
       s += "[" + name[i] + "] " + f + " + " + (c-t) + "/" + c + " (あと " + t + " Track)\n";
     }
