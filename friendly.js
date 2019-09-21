@@ -1,6 +1,5 @@
 javascript:
 (function(){
-  alert("start");
   var url = "https://ongeki-net.com/ongeki-mobile/character/";
   if(location.href != url){
     var request = new XMLHttpRequest();
@@ -9,7 +8,6 @@ javascript:
     request.send("");
     request.onreadystatechange = function() {
       if (request.readyState == 4 && request.status == 200) {
-        alert("loaded");
         d = request.response;
         exec(d);
       }
@@ -35,7 +33,7 @@ javascript:
       return item.firstElementChild;
     });
     var parcentages = friendlies.map(function(item){
-      return item.getAttribute("style").split("(")[1].split("px")[0] - 12;
+      return 1 - (parseFloat(item.getAttribute("style").split("(")[1].split("px")[0]) - 12) / 60;
     });
     var friendlyCount = [].map.call(containers, function(item){
       var ch = item.children;
@@ -45,13 +43,16 @@ javascript:
       t += parseInt(ch[1].getAttribute("src").split("num_")[1].split(".png")[0]);
       return t;
     });
-    var s = "";
+    var s = [];
     for(i=0; i<name.length; i++){
-      f = friendlyCount[i];
-      c = counter[parseInt(f/100)] * parseInt((f % 100)/10 + 1);
-      t = parseInt(parcentages[i] * c / 6 + 0.5) / 10;
-      s += "[" + name[i] + "] " + f + " + " + (c-t) + "/" + c + " (‚ ‚Æ " + t + " Track)\n";
+      var f = friendlyCount[i];
+      var f100 = parseInt(f/100);
+      var f10 = parseInt((f - f100) / 10);
+      var c = counter[f100] * f10 / 10;
+      var t = parseInt(parcentages[i] * counter[f100] * f10 + 0.5) / 10 ;
+      s[name[i]] =  [f, c, t];
     }
-    window.open().document.body.innerText = s;
+    var w = window.open('about:blank', null);
+    w.console.log(s);
   };
 }) (document)
