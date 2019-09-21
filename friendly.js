@@ -30,7 +30,7 @@ javascript:
     /* character name table */
     var name = [];
     [].forEach.call(d.forms, function(form){
-      switch(form.idx.value){
+      switch(parseInt(form.idx.value)){
         case 1000: name.push("星咲 あかり"); break;
         case 1001: name.push("藤沢 柚子"); break;
         case 1002: name.push("三角 葵"); break;
@@ -47,7 +47,7 @@ javascript:
         case 1014: name.push("日向 千夏"); break;
         case 1013: name.push("柏木 美亜"); break;
         case 1015: name.push("東雲 つむぎ"); break;
-      });
+      };
     });
     
     var containers = d.getElementsByClassName("character_friendly_conainer");
