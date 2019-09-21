@@ -25,15 +25,37 @@ javascript:
     }
     counter[6] = 228;
     counter[7] = 312;
+    counter[8] = 0;
     
     /* character name table */
-    var name = ["¯ç ‚ ‚©‚è", "“¡‘ò —Mq", "OŠp ˆ¨", "‚£ —œ", "Œ‹é ä»‹è", "—•Œ´ ’Ö", "÷ˆä tØ", "‘‰³— Ê‰Ø", "ˆä”VŒ´ ¬¯", "”–Ø ç•P", "‹ãŠ •–", "ˆ§â ˆ©", "ìF“‡ —L²"];
+    var name = [];
+    [].forEach.call(d.forms, function(form){
+      switch(form.idx.value){
+        case 1000: name.push("æ˜Ÿå’² ã‚ã‹ã‚Š"); break;
+        case 1001: name.push("è—¤æ²¢ æŸšå­"); break;
+        case 1002: name.push("ä¸‰è§’ è‘µ"); break;
+        case 1003: name.push("é«˜ç€¬ æ¢¨ç·’"); break;
+        case 1004: name.push("çµåŸ è‰ç–"); break;
+        case 1005: name.push("è—åŸ æ¤¿"); break;
+        case 1007: name.push("æ¡œäº• æ˜¥èœ"); break;
+        case 1006: name.push("æ—©ä¹™å¥³ å½©è¯"); break;
+        case 1010: name.push("äº•ä¹‹åŸ å°æ˜Ÿ"); break;
+        case 1009: name.push("æŸæœ¨ å’²å§«"); break;
+        case 1008: name.push("ä¹æ¢ æ¥“"); break;
+        case 1011: name.push("é€¢å‚ èŒœ"); break;
+        case 1012: name.push("ç æ´²å³¶ æœ‰æ –"); break;
+        case 1014: name.push("æ—¥å‘ åƒå¤"); break;
+        case 1013: name.push("æŸæœ¨ ç¾äºœ"); break;
+        case 1015: name.push("æ±é›² ã¤ã‚€ã"); break;
+      });
+    });
+    
     var containers = d.getElementsByClassName("character_friendly_conainer");
     var friendlies = [].map.call(containers, function(item){
       return item.firstElementChild;
     });
     var parcentages = friendlies.map(function(item){
-      return 1 - (parseFloat(item.getAttribute("style").split("(")[1].split("px")[0]) - 12) / 60;
+      return 1 - (parseFloat(item.getAttribute("style").split("rect(")[1].split("px")[0]) - 12) / 60;
     });
     var friendlyCount = [].map.call(containers, function(item){
       var ch = item.children;
@@ -43,16 +65,26 @@ javascript:
       t += parseInt(ch[1].getAttribute("src").split("num_")[1].split(".png")[0]);
       return t;
     });
-    var s = [];
+    var data = [];
+    console.log(parcentages);
     for(i=0; i<name.length; i++){
       var f = friendlyCount[i];
       var f100 = parseInt(f/100);
-      var f10 = parseInt((f - f100) / 10);
-      var c = counter[f100] * f10 / 10;
-      var t = parseInt(parcentages[i] * counter[f100] * f10 + 0.5) / 10 ;
-      s[name[i]] =  [f, c, t];
+      var f10 = parseInt((f - f100 * 100) / 10) + 1;
+      var c = counter[f100] * f10;
+      var t = Math.round(parcentages[i] * counter[f100] * f10);
+      data[name[i]] =  [f, c, t, f100, f10, f, counter[f100]];
     }
-    var w = window.open('about:blank', null);
-    w.console.log(s);
+    console.log(data);
+    var w = window.open();
+    var p = w.document.body.appendChild(w.document.createElement("p"));
+    p.innerText = name.map(function(item){
+      var f = data[item][0];
+      var c = data[item][1];
+      var t = data[item][2];
+      var s = "[" + item + "] " + f + " + " + t/10 + "/" + c/10 + " (ã‚ã¨ " + (c-t)/10 + " stepsï¼‰";
+      console.log(s);
+      return s;
+    }).join("\n");
   };
 }) (document)
