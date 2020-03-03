@@ -78,20 +78,24 @@ function exec(d){
   /* 別窓オープン、情報整列 */
   var w = window.open();
   var table = w.document.body.appendChild(w.document.createElement("table"));
-  table.style.textAlign = "center";
-  table.style.border = 1;
+  table.createCaption().innerText = "親密度の詳細一覧";
+  w.document.head.appendChild(w.document.createElement("style")).innerText = "table {left: 0; right: 0; margin: auto;} thead td {text-align: center; min-width: 100px;} tbody > tr :first-child {text-align: center;} tbody > tr > td + td { text-align: right;} td span {padding: 5px;}";
+  table.border = 1;
   var addTextRow = function(row, str){
-    row.insertCell().appendChild(d.createElement("span")).innerText = str;
+    var cell = row.insertCell();
+    cell.appendChild(d.createElement("span")).innerText = str;
+    cell.style.minWidth = "100px";
   }
     
   Object.keys(data).forEach(idx=>{
     /* ヘッダーがなければ生成 */
     if(table.header === undefined){
+      /* ヘッダー */
       table.header = table.createTHead().insertRow();
       addTextRow(table.header, "キャラ名");
       addTextRow(table.header, "親密度");
-      addTextRow(table.header, "端数（％）");
-      addTextRow(table.header, "端数カウント");
+      addTextRow(table.header, "端数 (％)");
+      addTextRow(table.header, "端数 (カウント)");
     }
     
     /* 情報を載せていく */
@@ -102,7 +106,7 @@ function exec(d){
     var row = table.body.insertRow();
     addTextRow(row, t.name);
     addTextRow(row, t.friendly);
-    addTextRow(row, t.fraction);
+    addTextRow(row, (parseInt(t.fraction * 10000) / 100) + " %");
     addTextRow(row, t.nowCount + " / " + t.fullCount + " (残り " + t.nextCount + " カウント)");
   });
 };
